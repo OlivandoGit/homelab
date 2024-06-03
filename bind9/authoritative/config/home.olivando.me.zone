@@ -1,0 +1,18 @@
+$TTL 2d
+
+$ORIGIN home.olivando.me.
+
+@	            IN	    SOA     home.olivando.me. ns.olivnaodo.me (
+                                                    2024052601; serial
+                                                    12h ; refresh
+                                                    15m ; retry
+                                                    3w ; expire
+                                                    2h ; minimum TTL
+                                                    )
+	            IN	    NS      ns1.home.olivando.me.
+                IN      NS      ns2.home.olivando.me.
+
+ns1             IN      A       192.168.1.253
+ns2             IN      A       192.168.1.252
+
+control         IN      A       192.168.1.86

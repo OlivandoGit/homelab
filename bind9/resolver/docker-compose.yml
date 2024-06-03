@@ -1,0 +1,16 @@
+services:
+  bind9-resolver:
+    container_name: bind9-resolver
+    image: ubuntu/bind9
+
+    environment:
+      - BIND9_USER=root
+      - TZ=Europe/London
+
+    network_mode: host
+
+    volumes:
+      - /etc/bind/resolver:/etc/bind:rw
+      - /var/bind/resolver:/var/bind
+
+    restart: unless-stopped

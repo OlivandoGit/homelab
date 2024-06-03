@@ -1,0 +1,19 @@
+services:
+  bind9-authoritative:
+    container_name: bind9-authoritative
+    image: ubuntu/bind9
+
+    environment:
+      - BIND9_USER=root
+      - TZ=Europe/London
+
+    ports:
+      - "2053:53/tcp"
+      - "2053:53/udp"
+    # network_mode: host
+
+    volumes:
+      - /etc/bind/authoritative:/etc/bind:rw
+      - /var/bind/authoritative:/var/bind
+
+    restart: unless-stopped

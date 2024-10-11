@@ -1,0 +1,19 @@
+volumes:
+  kea-data: {}
+
+services:
+  kea:
+    image: kea_dhcp4:latest
+    
+    container_name: kea_dhcp4
+
+    ports: 
+      - "67:67/udp"
+
+    restart: unless-stopped
+
+    volumes:
+      - /etc/kea:/etc/kea
+      - kea-data:/var/lib/kea
+
+    network_mode: host

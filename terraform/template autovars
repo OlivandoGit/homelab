@@ -1,0 +1,7 @@
+#filename = .credentials.auto.tfvars
+
+proxmox_api_url = "https://<proxmox server ip>:8006/api2/json"
+proxmox_api_token_id = "<terraform-username>@pam!<terraform-api-token-name>"
+proxmox_api_token_secret = ""
+
+ssh_key = ""

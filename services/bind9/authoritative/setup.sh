@@ -19,7 +19,7 @@ do
             sudo rm -r /etc/bind/authoritative/*
         fi
 
-        if [ ! -d /var/bind/authoratatiive ]; then
+        if [ ! -d /var/bind/authoritative ]; then
             echo "creating /var/bind/authoritative"
             sudo mkdir -p /var/bind/authoritative
         else

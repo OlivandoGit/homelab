@@ -1,0 +1,8 @@
+- hosts: CORE
+  become: true
+  gather_facts: true
+
+  roles:
+    - precheck
+    - docker/setup
+    - docker/install

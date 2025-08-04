@@ -1,0 +1,10 @@
+---
+- name: Check connection
+  block:
+    - ping:
+  
+    - assert:
+        that: ansible_play_hosts == groups[hostvars[inventory_hostname]["group_names"][0]]
+        fail_msg: One or more hosts are unreachable
+        success_msg: All hosts are reachable, continuing...
+      run_once: true

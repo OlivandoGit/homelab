@@ -1,2 +1,0 @@
-[CORE]
-${CORE_ips}

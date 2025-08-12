@@ -27,11 +27,12 @@ do
             sudo rm -r /var/bind/authoritative/*
         fi
 
-        sudo mv ~/config/.$i.named.conf /etc/bind/authoritative/named.conf
-        sudo mv ~/config/[^.]* /var/bind/authoritative
+        sudo mv ~/config/$i.named.conf /etc/bind/authoritative/named.conf
+        sudo mv ~/config/home.olivando.me.zone /var/bind/authoritative
 
         sudo rm -r ~/config
 
+        #Turn off the DNSStubListener for this VM
         sudo sed -i 's/#DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
         sudo systemctl restart systemd-resolved.service
 

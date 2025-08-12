@@ -18,15 +18,12 @@
       - containerd.io
     state: present
     update_cache: true
+  notify: Restart Docker
+
 
 - name: adding user to docker group
   user:
     name: "{{ docker_user }}"
     groups: docker
     append: yes
-
-- name: Restart Docker
-  ansible.builtin.service:
-    name: docker
-    state: restarted
-    enabled: true
+  notify: Restart Docker

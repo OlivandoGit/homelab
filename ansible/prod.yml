@@ -6,3 +6,7 @@
     - precheck
     - docker/setup
     - docker/install
+    - nfs/setup
+    - nfs/mount
+
+    

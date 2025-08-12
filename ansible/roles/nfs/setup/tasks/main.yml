@@ -1,0 +1,13 @@
+---
+- name: Update
+  ansible.builtin.apt:
+    name: aptitude
+    state: present
+    update_cache: true
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - nfs-common
+    state: present
+    update_cache: true

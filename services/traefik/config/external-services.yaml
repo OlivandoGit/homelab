@@ -1,0 +1,31 @@
+http:
+  routers:
+    router-pm01:
+      entryPoints:
+        - websecure
+      rule: Host(`pm-01.prod-01.home.olivando.me`)
+      service: service-pm01
+      tls: {}
+
+    router-truenas:
+      entryPoints:
+        - websecure
+      rule: Host(`truenas.prod-01.home.olivando.me`)
+      service: service-truenas
+      tls: {}
+
+  services:
+    service-pm01:
+      loadBalancer:
+        serversTransport: insecureTransport
+        servers:
+        - url: "https://pm-01.home.olivando.me:8006"
+
+    service-truenas:
+      loadBalancer:
+        servers:
+        - url: "http://truenas.home.olivando.me/"
+
+  serversTransports:
+    insecureTransport:
+      insecureSkipVerify: true

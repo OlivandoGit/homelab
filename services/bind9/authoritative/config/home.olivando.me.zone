@@ -21,10 +21,9 @@ pm-01           IN      A       192.168.1.200
 
 truenas         IN      A       192.168.1.201
 
-prod-01         IN      A       192.168.1.210
-
 core-01         IN      A       192.168.1.253
 core-02         IN      A       192.168.1.252 
 
-traefik         IN    CNAME     prod-01
-nginx           IN    CNAME     prod-01
+prod-01         IN      A       192.168.1.210
+*.prod-01       IN      CNAME   prod-01
+

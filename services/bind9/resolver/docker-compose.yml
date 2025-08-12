@@ -10,7 +10,7 @@ services:
     network_mode: host
 
     volumes:
-      - /etc/bind/resolver:/etc/bind:rw
+      - /mnt/docker_volumes/bind9-resolver/config:/etc/bind:ro
       - /var/bind/resolver:/var/bind
 
     restart: unless-stopped

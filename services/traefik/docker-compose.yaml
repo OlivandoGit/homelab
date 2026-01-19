@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:v3.0
+    image: traefik:v3.6
 
     container_name: traefik
 
@@ -22,6 +22,8 @@ services:
       TRAEFIK_DASHBOARD_CREDENTIALS: ${TRAEFIK_DASHBOARD_CREDENTIALS}
 
     command:
+#      - "--log.level=DEBUG"
+
       - "--api=true"
 
       - "--providers.docker=true"
@@ -32,14 +34,15 @@ services:
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
 
       - "--entryPoints.websecure.address=:443"
-      
+
       - "--certificatesresolvers.cloudflare.acme.dnschallenge=true"
       - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53"
+#     - "--certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesresolvers.cloudflare.acme.email=${CF_API_EMAIL}"
       - "--certificatesresolvers.cloudflare.acme.storage=/acme.json"
 
-    env_file: /mnt/docker_volumes/traefik/.env
+    env_file: .env
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -51,7 +54,7 @@ services:
       - "traefik.http.routers.traefik.rule=Host(`traefik.prod-01.home.olivando.me`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=auth"
-      
+
       - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
 
       - "traefik.http.routers.traefik.tls=true"

@@ -1,0 +1,22 @@
+### tabulapdf docker-compose.yml example ###
+services:
+    tabulapdf:
+        image: amazoncorretto:17
+        container_name: tabulapdf-app
+        command: >
+          java -Dfile.encoding=utf-8 -Xms256M -Xmx1024M -Dwarbler.port=8080 -Dtabula.openBrowser=false --add-opens=java.base/java.util.zip=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-exports=java.desktop/sun.java2d=ALL-UNNAMED --add-opens=java.desktop/sun.java2d=ALL-UNNAMED -jar /app/tabula.jar
+        volumes:
+          - /mnt/docker-volumes/tabula:/app
+
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.nginx.rule=Host(`tabula.prod-01.home.olivando.me`)"
+          - "traefik.http.routers.nginx.entrypoints=websecure"
+          - "traefik.http.routers.nginx.tls=true"
+          - "traefik.http.services.nginx.loadbalancer.server.port=8080"
+        networks:
+          - proxy
+
+networks:
+    proxy:
+        external: true

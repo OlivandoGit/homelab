@@ -1,8 +1,6 @@
 #!/bin/bash
-rm -r /mnt/docker_volumes/traefik/config/*
-cp config/* /mnt/docker_volumes/traefik/config/
-cp .env /mnt/docker_volumes/traefik/
-
+cp ./config /mnt/docker-volumes/traefik/config
+cp .env /mnt/docker-volumes/traefik/
 
 ssh prod-01 << EOF
         if [ ! -d /var/traefik ]; then

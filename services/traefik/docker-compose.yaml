@@ -46,7 +46,7 @@ services:
 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/docker_volumes/traefik/config:/etc/traefik
+      - /mnt/docker-volumes/traefik/config:/etc/traefik
       - /var/traefik/acme.json:/acme.json
 
     labels:

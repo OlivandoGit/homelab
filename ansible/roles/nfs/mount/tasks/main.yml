@@ -1,12 +1,12 @@
 ---
 - name: docker_volumes directory
   ansible.builtin.file:
-    path: /mnt/docker_volumes
+    path: /mnt/docker-volumes
     state: directory
 
 - name: Mount docker_volumes
   ansible.posix.mount:
-      src: truenas.home.olivando.me:/mnt/fast-storage/docker_volumes
-      path: /mnt/docker_volumes
+      src: truenas.home.olivando.me:/mnt/fast-storage/docker-volumes
+      path: /mnt/docker-volumes
       fstype: nfs
       state: mounted

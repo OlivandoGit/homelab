@@ -1,0 +1,1 @@
+ENV_APP_KEY=base64:<key explained by docs https://docs.speedtest-tracker.dev/>

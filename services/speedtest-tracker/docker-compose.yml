@@ -1,0 +1,39 @@
+services:
+    speedtest-tracker:
+        image: lscr.io/linuxserver/speedtest-tracker:latest
+
+        restart: unless-stopped
+
+        container_name: speedtest-tracker
+
+        environment:
+            - APP_DEBUG=true
+            - PUID=1000
+            - PGID=1000
+            - APP_KEY=${ENV_APP_KEY}
+            - APP_URL="speedtest.prod-01.home.olivando.me"
+            - DB_CONNECTION=sqlite
+            - SPEEDTEST_SCHEDULE="15 * * * *"
+
+        env_file: ".env"
+
+        volumes:
+            - speedtest-db:/config
+
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.speedtest.rule=Host(`speedtest.prod-01.home.olivando.me`)"
+          - "traefik.http.routers.speedtest.entrypoints=websecure"
+          - "traefik.http.routers.speedtest.tls=true"
+          - "traefik.http.services.speedtest.loadbalancer.server.port=80"
+
+        networks:
+          - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+    speedtest-db:
+

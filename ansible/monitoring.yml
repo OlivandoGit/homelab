@@ -1,0 +1,12 @@
+- hosts: MONITOR
+  become: true
+  gather_facts: true
+
+  roles:
+    - precheck
+    - docker/setup
+    - docker/install
+    - nfs/setup
+    - nfs/mount
+
+    

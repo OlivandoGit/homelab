@@ -36,9 +36,9 @@ do
 
 EOF
 
-    docker --context $i compose down
-    docker --context $i compose up -d
-    docker --context $i ps
+    # docker --context $i compose down
+    # docker --context $i compose up -d
+    # docker --context $i ps
 
 done
 

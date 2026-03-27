@@ -1,16 +1,27 @@
+networks:
+  bind9-monitoring:
+    external: true
+
 services:
   bind9-resolver:
+    image: internetsystemsconsortium/bind9:9.20
     container_name: bind9-resolver
-    image: ubuntu/bind9
 
     environment:
       - BIND9_USER=root
       - TZ=Europe/London
 
-    network_mode: host
-
     volumes:
-      - /etc/bind/resolver:/etc/bind:ro
-      - /var/bind/resolver:/var/bind
+      - /etc/bind/resolver/named.conf:/etc/bind/named.conf
+
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+
+    expose:
+      - 80
+
+    networks:
+      - bind9-monitoring      
 
     restart: unless-stopped

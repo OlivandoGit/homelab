@@ -1,0 +1,25 @@
+networks:
+  monitoring:
+    external: true
+
+services:
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest 
+    container_name: cadvisor-core-02
+    
+    devices:
+      - /dev/kmsg
+    
+    privileged: true
+    
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+  
+    networks:
+      - monitoring
+      
+    restart: unless-stopped

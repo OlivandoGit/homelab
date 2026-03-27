@@ -1,0 +1,35 @@
+networks:
+  proxy:
+    external: true
+    
+  monitoring-frontend:
+    external: true
+
+
+volumes:
+  grafana-data:
+  
+  
+services:
+  grafana:
+    image: grafana/grafana-oss:latest
+
+    container_name: grafana
+
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafanas.rule=Host(`grafana.prod-01.home.olivando.me`)
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - traefik.http.routers.grafana.tls=true
+
+    networks:
+      - proxy
+      - monitoring-frontend
+
+    expose:
+      - 3000
+
+    restart: unless-stopped

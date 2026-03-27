@@ -10,10 +10,11 @@ services:
 
         labels:
           - "traefik.enable=true"
-          - "traefik.http.routers.nginx.rule=Host(`tabula.prod-01.home.olivando.me`)"
-          - "traefik.http.routers.nginx.entrypoints=websecure"
-          - "traefik.http.routers.nginx.tls=true"
-          - "traefik.http.services.nginx.loadbalancer.server.port=8080"
+          - "traefik.http.routers.tabula.rule=Host(`tabula.prod-01.home.olivando.me`)"
+          - "traefik.http.routers.tabula.entrypoints=websecure"
+          - "traefik.http.routers.tabula.tls=true"
+          - "traefik.http.services.tabula.loadbalancer.server.port=8080"
+          
         networks:
           - proxy
 

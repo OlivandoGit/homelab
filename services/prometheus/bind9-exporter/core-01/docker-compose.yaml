@@ -1,0 +1,23 @@
+networks:
+  bind9-monitoring:
+    external: true
+
+  monitoring:
+    external: true
+
+services:
+  bind-exporter:
+    image: 'prometheuscommunity/bind-exporter:v0.3.0'
+
+    container_name: bind9-exporter-core-01
+
+    command:
+      --bind.stats-url http://bind9-resolver:80
+      --bind.stats-groups=server,view
+
+    expose:
+      - 9119
+
+    networks:
+      - bind9-monitoring
+      - monitoring

@@ -14,6 +14,13 @@ http:
       service: service-truenas
       tls: {}
 
+    router-grafana:
+      entryPoints:
+        - websecure
+      rule: Host(`grafana.prod-01.home.olivando.me`)
+      service: service-grafana
+      tls: {}
+
   services:
     service-pm01:
       loadBalancer:
@@ -25,6 +32,11 @@ http:
       loadBalancer:
         servers:
         - url: "http://truenas.home.olivando.me/"
+
+    service-grafana:
+      loadBalancer:
+        servers:
+        - url: "http://grafana:3000"
 
   serversTransports:
     insecureTransport:

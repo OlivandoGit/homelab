@@ -1,0 +1,39 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+
+  - job_name: 'cadvisor-monitor-01'
+    static_configs:
+      - targets: ['cadvisor-monitor-01:8080']
+
+  - job_name: 'cadvisor-prod-01'
+    static_configs:
+      - targets: ['cadvisor-prod-01:8080']
+
+  - job_name: 'cadvisor-core-01'
+    static_configs:
+      - targets: ['cadvisor-core-01:8080']
+
+  - job_name: 'cadvisor-core-02'
+    static_configs:
+      - targets: ['cadvisor-core-02:8080']
+
+
+  - job_name: 'bind9-core-01'
+    static_configs:
+      - targets: ['bind9-exporter-core-01:9119']
+
+  - job_name: 'bind9-core-02'
+    static_configs:
+      - targets: ['bind9-exporter-core-02:9119']
+
+  - job_name: 'speedtest-tracker'
+    scrape_interval: 2m
+    metrics_path: /prometheus
+    static_configs:
+      - targets: ['speedtest-tracker']

@@ -21,3 +21,5 @@ services:
     networks:
       - bind9-monitoring
       - monitoring
+
+    restart: unless-stopped

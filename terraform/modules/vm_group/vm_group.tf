@@ -34,7 +34,7 @@ resource "proxmox_vm_qemu" "vm_group" {
     firewall = false
   }
 
-  ipconfig0 = "ip=${var.vm_ips[count.index]},gw=${var.vm_gateway}"
+  ipconfig0 = "ip=${var.vm_ips[count.index]},gw=${var.vm_gateway},ip6=auto"
 
   disks {
     scsi {
@@ -61,4 +61,6 @@ resource "proxmox_vm_qemu" "vm_group" {
   lifecycle {
     ignore_changes = [ network, disks, sshkeys, target_node ]
   }
+
+  skip_ipv6 = false
 }

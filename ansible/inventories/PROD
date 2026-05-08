@@ -1,2 +1,2 @@
 [PROD]
-PROD-01 ansible_host=192.168.1.210
+PROD-01 ansible_host=2a00:23c4:1fb2:9801:7411:c1ff:fe4d:7f1d ipv4_address=192.168.1.210

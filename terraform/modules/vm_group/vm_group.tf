@@ -2,7 +2,7 @@ resource "proxmox_vm_qemu" "vm_group" {
   count = var.group_num_vms
 
   name = "${format("${var.group_name}-%0${max(floor(var.group_num_vms / 10), 2)}d", count.index + 1)}"
-  desc = "${var.group_name} vm ${count.index}"
+  description = "${var.group_name} vm ${count.index}"
 
   clone = var.vm_template
   os_type = "cloud-init"
@@ -13,10 +13,13 @@ resource "proxmox_vm_qemu" "vm_group" {
   target_node = var.group_pmnodes[count.index % length(var.group_pmnodes)]
 
   #Boot with Proxmox node
-  onboot = true
-
-  cpu = "host"
-  cores = var.vm_cores
+  start_at_node_boot = true
+  
+  cpu {
+    type = "host"
+    cores = var.vm_cores
+  }
+  
   memory = var.vm_memory
   balloon = 0
 
@@ -25,6 +28,7 @@ resource "proxmox_vm_qemu" "vm_group" {
   qemu_os = "l26"
 
   network {
+    id = 0
     model = "virtio"
     bridge = "vmbr0"
     firewall = false
@@ -41,9 +45,17 @@ resource "proxmox_vm_qemu" "vm_group" {
         }
       }
     }
+
+    ide {
+      ide3 {
+        cloudinit {
+          storage = var.vm_disk_location
+        }  
+      }
+    }
   }
 
-  cloudinit_cdrom_storage = var.vm_disk_location
+#  cloudinit_cdrom_storage = var.vm_disk_location
   boot = "order=scsi0;net0"
 
   lifecycle {

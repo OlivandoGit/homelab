@@ -18,10 +18,6 @@ variable "vm_ip" {
   type = string
 }
 
-variable "vm_ipv6" {
-  type = string
-}
-
 variable "pmnode" {
   type = string
 }

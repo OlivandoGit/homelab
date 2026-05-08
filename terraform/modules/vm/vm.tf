@@ -33,7 +33,7 @@ resource "proxmox_vm_qemu" "vm" {
     firewall = false
   }
 
-  ipconfig0 = "ip=${var.vm_ip},gw=${var.vm_gateway},ip6=${var.vm_ipv6}"
+  ipconfig0 = "ip=${var.vm_ip},gw=${var.vm_gateway},ip6=auto"
 
   disks {
     scsi {

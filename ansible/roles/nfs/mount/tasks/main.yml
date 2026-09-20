@@ -10,3 +10,7 @@
       path: /mnt/docker-volumes
       fstype: nfs
       state: mounted
+
+- name: add media
+  include_tasks: media.yml
+  when: extra_nfs == "media"

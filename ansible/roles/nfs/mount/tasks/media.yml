@@ -1,0 +1,12 @@
+---
+- name: Media directory
+  ansible.builtin.file:
+    path: /mnt/media
+    state: directory
+
+- name: Mount media volumes
+  ansible.posix.mount:
+      src: truenas.home.olivando.me:/mnt/fast-storage/media
+      path: /mnt/media
+      fstype: nfs
+      state: mounted

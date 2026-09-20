@@ -7,6 +7,7 @@
     - docker/setup
     - docker/install
     - nfs/setup
-    - nfs/mount
+    - role: nfs/mount
+      extra_nfs: "media"
 
     

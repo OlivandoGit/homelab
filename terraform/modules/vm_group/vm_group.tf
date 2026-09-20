@@ -5,8 +5,11 @@ resource "proxmox_vm_qemu" "vm_group" {
   description = "${var.group_name} vm ${count.index}"
 
   clone = var.vm_template
+  
   os_type = "cloud-init"
 
+  cicustom   = "vendor=local:snippets/qemu-guest-agent.yml" # /var/lib/vz/snippets/qemu-guest-agent.yml
+  ciupgrade = true
   ciuser = var.vm_user
   sshkeys = var.ssh_key
 
@@ -55,11 +58,10 @@ resource "proxmox_vm_qemu" "vm_group" {
     }
   }
 
-#  cloudinit_cdrom_storage = var.vm_disk_location
-  boot = "order=scsi0;net0"
+  boot = "order=scsi0"
 
   lifecycle {
-    ignore_changes = [ network, disks, sshkeys, target_node ]
+    ignore_changes = [ network, disks, sshkeys, target_node, startup_shutdown ]
   }
 
   skip_ipv6 = false
